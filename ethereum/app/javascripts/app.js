@@ -19,6 +19,19 @@ function refreshBalance() {
   });
 };
 
+function refreshBalance2() {
+  var meta = MetaCoin.deployed();
+  meta.getBalance.call(account, {from: account})
+    .then((value) => {
+      var balance_element = document.getElementById("balance");
+      balance_element.innerHTML = value.valueOf();
+    })
+    .catch((e) => {
+      console.log(e);
+      setStatus("Error getting balance; see log.");
+    });
+};
+
 function sendCoin() {
   var meta = MetaCoin.deployed();
 
@@ -51,6 +64,9 @@ window.onload = function() {
     accounts = accs;
     account = accounts[0];
 
-    refreshBalance();
+    var accountnb = document.getElementById("accountnb");
+    accountnb.innerHTML = account;
+
+    refreshBalance2();
   });
 }
