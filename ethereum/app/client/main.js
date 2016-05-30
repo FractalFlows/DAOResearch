@@ -28,8 +28,8 @@ Template.account.helpers({
               .filter(e=>web3.eth.accounts.includes(e))
               .map(e=>({accountnb:e}))
   },
-  balance: () => TokenInstance.balanceOf(Session.get('account')).toString(10),
-  balance2: () => TokenInstance.balanceOf(Session.get('account2')).toString(10),
+  balance: () => TokenInstance.balances(Session.get('account')).toString(10),
+  balance2: () => TokenInstance.balances(Session.get('account2')).toString(10),
   sign: () => TokenInstance.symbol(),
 });
 

@@ -19,11 +19,10 @@ contract Emergence {
 	function Emergence() {
 		minter = msg.sender;
 		storedData = 10;
-		if (_supply == 0) _supply = 1000;
-		balances[tx.origin] = _supply;
-		name = _name;
-		symbol = _symbol;
-		decimals = _decimals;
+		balances[tx.origin] = 1000;
+		name = 'Emergence';
+		symbol = 'Æ';
+		decimals = 16;
 	}
 
 	function setURL(string x){

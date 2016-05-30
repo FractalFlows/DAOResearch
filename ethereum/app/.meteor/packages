@@ -28,6 +28,7 @@ ethereum:accounts
 ethereum:blocks
 frozeman:template-var
 frozeman:persistent-minimongo2
+frozeman:persistent-minimongo
 session
 simple:highlight.js
 chuangbo:marked
