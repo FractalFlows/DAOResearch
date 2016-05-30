@@ -1,64 +1,62 @@
 contract('Emergence', function(accounts) {
-  it("should be able to get and set", (done)=>{
+  it("should be able to get and set", (done) => {
     var em = Emergence.deployed();
 
     var val = 100;
     em.set(val, {from:accounts[0]})
-      .then(()=>em.get.call({from:accounts[0]}))
-      .then((value)=>assert.equal(value.toNumber(), val,
+      .then(() => em.get.call({from:accounts[0]}))
+      .then((value) => assert.equal(value.toNumber(), val,
           "wrong value in storedData"))
       .then(done).catch(done);
   });
 
-  it("should be able to set a URL and get it when enough is paid", (done)=>{
+  it("should be able to set a URL and get it when enough is paid", (done) => {
     var em = Emergence.deployed();
 
     var val = "http://solidity.readthedocs.io/en/latest/types.html#arrays";
     em.setURL(val, {from:accounts[0]})
-      .then(()=>em.getURL.call({from:accounts[0], value:20}))
-      .then((value)=>assert.equal(value, val,
-          "wrong value in url"))
+      .then(() => em.getURL.call({from:accounts[0], value:20}))
+      .then((v) => assert.equal(v, val, "wrong url returned"))
       .then(done).catch(done);
   });
 
-  it("shouldn't be able to get a URL if not enough is paid", (done)=>{
+  it("shouldn't be able to get a URL if not enough is paid", (done) => {
     var em = Emergence.deployed();
 
     var val = "http://solidity.readthedocs.io/en/latest/types.html#arrays";
     var val2 = "http://google.com"
     em.setURL(val, {from:accounts[0]})
-      .then(()=>em.getURL.call({from:accounts[0], value:1}))
-      .then((value)=>assert.equal(value, val2,
-          "wrong value in url"))
+      .then(() => em.getURL.call({from:accounts[0], value:1}))
+      .then((v) => assert.equal(v, val2, "wrong value in url"))
       .then(done).catch(done);
   });
 
-  it("should be able to mint", (done)=>{
+  it("should be able to mint", (done) => {
     var em = Emergence.deployed();
     var amount = 100;
 
     em.mint(accounts[1], amount, {from:accounts[0]})
-      .then(()=>em.balances(accounts[1]))
-      .then(e=>assert.equal(e.toNumber(), amount, "wrong balance of accounts[1]"))
+      .then(() => em.balances(accounts[1]))
+      .then(e => assert.equal(e.toNumber(), amount, "wrong balance of accounts[1]"))
       .then(done).catch(done)
   });
 
-  it("should have 10000 in the first account", (done)=>{
+  it("should have 10000 in the first account", (done) => {
     var em = Emergence.deployed();
     var amount = 10000;
 
     em.balances(accounts[0])
-      .then((e)=>assert(e.toNumber(), amount, "Balance of account[0] isn't 10000"))
+      .then((e) => assert(e.toNumber(), amount, "Balance of account[0] isn't 10000"))
       .then(done).catch(done)
   });
 
-  it("should be possible to send coins from account 1 to account 3",(done)=>{
+  it("should be possible to send coins from account 1 to account 3",(done) => {
     var em = Emergence.deployed();
     var amount = 1001;
 
     em.send(accounts[3], amount, {from:accounts[0]})
-      .then(()=>em.balances(accounts[3]))
-      .then((v)=>assert(v.toNumber(), amount, "Balance of account[3] is wrong"))
+      .then(() => em.balances(accounts[3]))
+      .then((v) => assert(v.toNumber(), amount, "Balance of account[3] is wrong"))
       .then(done).catch(done)
   })
 
