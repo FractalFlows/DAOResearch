@@ -1,0 +1,108 @@
+<head>
+  <title>Ethereum-CPH Token</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Ethereum-CPH Token</h1>
+
+      {{> account }}
+
+      {{> transactions }}
+
+      {{> lastblock}}
+  </div>
+
+</body>
+
+<template name="lastblock">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Last Block
+    </div>
+    <div class="panel-body">
+{{#markdown}}
+```
+{{{block}}}
+```
+{{/markdown}}
+    </div>
+  </div>
+</template>
+
+<template name="account">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Balance
+    </div>
+    <div class="panel-body">
+      <!-- FROM -->
+        <div class="col-md-4">
+          <div class="input-group" style="width:100%">
+          <div class="input-group-btn" style="width:20%">
+            <span class="input-group-addon" id="sizing-addon2" style="width:100%">From:</span>
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                {{#each local_accounts}}
+                  <li><a href="#" class="accountnb">{{accountnb}}</a></li>
+                {{/each}}
+              </ul>
+            </div><!-- /btn-group -->
+          </div>
+          <input id="account" class="form-control" placeholder="account number" value="0x158663Db1E4cDD3Df1220677371140a0B2068F6D">
+          <span class="input-group-addon" id="sizing-addon2" style="width:10%">{{balance}} {{sign}}</span>
+        </div>
+      </div>
+
+      <!-- TO -->
+      <div class="col-md-4">
+        <div class="input-group"  style="width:100%">
+          <div class="input-group-btn" style="width:20%">
+            <span class="input-group-addon" id="sizing-addon2"  style="width:100%">To:</span>
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                {{#each account}}
+                  <li><a href="#" class="accountnb2">{{accountnb}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+          <input id="account2" class="form-control" placeholder="account number"  style="width:100%" value="0x158663Db1E4cDD3Df1220677371140a0B2068F6D">
+          <span class="input-group-addon" id="sizing-addon2" style="width:10%">{{balance2}} {{sign}}</span>
+        </div>
+      </div>
+
+      <!-- Transfer -->
+      <div class="col-md-4">
+        <div class="input-group" style="width:100%">
+          <div class="input-group-btn" style="width:20%">
+            <button type="button" class="btn btn-primary" id="transfer" style="width:100%">Transfer</button>
+          </div>
+          <input id="amount" class="form-control" placeholder="amount"  type="number" value="1">
+          <span class="input-group-addon" id="sizing-addon2" style="width:10%">{{sign}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="transactions">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Past Transactions
+    </div>
+    <div class="panel-body">
+      {{#each transaction}}
+        <div class="container">
+          <strong>from:</strong> {{from}}<br>
+          <strong>to:</strong> {{to}}<br>
+          <strong>amount:</strong> {{value}}<br>
+        <hr>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

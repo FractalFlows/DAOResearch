@@ -34,3 +34,8 @@ In order to deploy the compiled smart contracts on the blockchain, you firt have
 Then run the following command
 
     $ truffle deploy
+
+### Use with meteor app
+Make sure you have the meteor-build-client installed
+
+    $ npm install -g meteor-build-client

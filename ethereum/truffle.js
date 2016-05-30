@@ -1,13 +1,13 @@
 module.exports = {
   build: {
-    "index.html": "index.html",
-    "app.js": [
-      "javascripts/app.js"
+    "main.html": "client/main.html",
+    "main.js": [
+      "client/main.js"
     ],
-    "app.css": [
-      "stylesheets/app.css"
+    "main.css": [
+      "client/main.css"
     ],
-    "images/": "images/"
+    // "images/": "images/"
   },
   deploy: [
     "MetaCoin",
@@ -17,5 +17,6 @@ module.exports = {
   rpc: {
     host: "localhost",
     port: 8545
-  }
+  },
+  build: './truffle-meteor-build'
 };

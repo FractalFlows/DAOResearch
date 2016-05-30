@@ -9,14 +9,21 @@ contract Emergence {
 	// The keyword "public" makes those variables
 	// readable from outside.
 	address public minter;
-	mapping (address => uint) public balances;
+	mapping (address => uint256) public balances;
 	uint public storedData;
 	string url;
+	string public name;
+  string public symbol;
+  uint8 public decimals;
 
 	function Emergence() {
-		balances[tx.origin] = 10000;
 		minter = msg.sender;
 		storedData = 10;
+		if (_supply == 0) _supply = 1000;
+		balances[tx.origin] = _supply;
+		name = _name;
+		symbol = _symbol;
+		decimals = _decimals;
 	}
 
 	function setURL(string x){
@@ -28,25 +35,25 @@ contract Emergence {
 		else return "http://google.com";
 	}
 
-  function set(uint x) {
+  function set(uint256 x) {
       storedData = x;
   }
 
 	// I think constant means that the method won't change anything
-  function get() constant returns (uint retVal) {
+  function get() constant returns (uint256 retVal) {
       return storedData;
   }
 
   // Events allow light clients to react on
   // changes efficiently.
-  event Sent(address from, address to, uint amount);
+  event Sent(address from, address to, uint256 amount);
 
-  function mint(address receiver, uint amount) {
+  function mint(address receiver, uint256 amount) {
       if (msg.sender != minter) return;
       balances[receiver] += amount;
   }
 
-  function send(address receiver, uint amount) {
+  function send(address receiver, uint256 amount) {
 			// Check that the account has enough balance
       if (balances[msg.sender] < amount) return;
       balances[msg.sender] -= amount;
@@ -54,4 +61,5 @@ contract Emergence {
 			// Notify the listeners
       Sent(msg.sender, receiver, amount);
   }
+
 }
