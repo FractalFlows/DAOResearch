@@ -1,0 +1,2 @@
+environments/development/contracts
+environments/test/contracts/*
